@@ -1,4 +1,5 @@
 FROM tyabu/base
+
 MAINTAINER tyabu1212@gmail.com
 
 ENV COQ_VERSION 8.6
@@ -24,11 +25,11 @@ RUN set -eux; \
     libocamlgraph-ocaml-dev \
     ; \
   \
-  cd /tmp; \
+  mkdir -p /tmp/coq; \
+  cd /tmp/coq; \
   wget -O coq.tar.gz $COQ_URL; \
-  tar xf coq.tar.gz; \
+  tar xf coq.tar.gz --strip-components=1; \
   rm -rf coq.tar.gz; \
-  cd coq; \
   ./configure -prefix /usr/local; \
   make; \
   make install; \
