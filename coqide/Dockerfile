@@ -8,23 +8,21 @@ ENV COQ_SHA1_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VE
 
 RUN set -eux; \
   \
-    buildDeps=' \
-      ca-certificates \
-      wget \
-      make \
-    '; \
+  buildDeps=' \
+    ca-certificates \
+    wget \
+    make \
+    ocaml-native-compilers \
+  '; \
   \
   apt-get update; apt-get install -y --no-install-recommends \
     $buildDeps \
     ocaml \
-    ocaml-native-compilers \
     ocaml-findlib \
     camlp5 \
     liblablgtk2-ocaml-dev \
     liblablgtksourceview2-ocaml-dev \
-    libgtk2.0-dev \
-    libocamlgraph-ocaml-dev \
-    ; \
+  ; \
   \
   mkdir -p /tmp/coq; \
   cd /tmp/coq; \
@@ -33,7 +31,7 @@ RUN set -eux; \
   sha1sum -c coq*.sha1; \
   tar xf coq*.tar.gz --strip-components=1; \
   ./configure -prefix /usr/local; \
-  make; \
+  make -j "$(nproc)"; \
   make install; \
   rm -rf /tmp/coq; \
   \
