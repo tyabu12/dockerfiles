@@ -20,7 +20,7 @@ RUN apt-get update \
     libgtk2.0-dev \
     libocamlgraph-ocaml-dev
 
-RUN cd /tmp
+RUN cd /tmp \
   && wget https://coq.inria.fr/distrib/V$VERSION/files/coq-$VERSION.tar.gz \
   && tar zxvf coq-$VERSION.tar.gz \
   && rm -rf coq-$VERSION.tar.gz \
