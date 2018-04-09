@@ -4,6 +4,7 @@ MAINTAINER tyabu1212@gmail.com
 
 ENV COQ_VERSION 8.6
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
+ENV COQ_SHA1_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz.sha1
 
 RUN set -eux; \
   \
@@ -27,14 +28,14 @@ RUN set -eux; \
   \
   mkdir -p /tmp/coq; \
   cd /tmp/coq; \
-  wget -O coq.tar.gz $COQ_URL; \
-  tar xf coq.tar.gz --strip-components=1; \
-  rm -rf coq.tar.gz; \
+  wget $COQ_URL; \
+  wget $COQ_SHA1_URL; \
+  sha1sum -c coq*.sha1; \
+  tar xf coq*.tar.gz --strip-components=1; \
   ./configure -prefix /usr/local; \
   make; \
   make install; \
-  cd ..; \
-  rm -rf coq; \
+  rm -rf /tmp/coq; \
   \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps; \
   apt-get clean; apt-get autoclean; \
