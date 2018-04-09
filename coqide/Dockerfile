@@ -1,23 +1,19 @@
-FROM debian:jessie-slim
+FROM tyabu/base
 MAINTAINER tyabu1212@gmail.com
 
-ENV LANG      ja_JP.UTF-8
-ENV LC_CTYPE  ja_JP.UTF-8
+ENV COQ_VERSION 8.6
+ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
 
-ENV VERSION "8.6"
-
-RUN mkdir /workspace
-WORKDIR /workspace
-
-RUN apt-get install locales \
-  && locale-gen ja_JP.UTF-8 \
-  && localedef -f UTF-8 -i ja_JP ja_JP.utf8
-
-RUN apt-get update \
-  && apt-get upgrade -y \
-  && apt-get autoremove -y \
-  && apt-get install -y \
-    wget \
+RUN set -eux; \
+  \
+    buildDeps=' \
+      ca-certificates \
+      wget \
+      make \
+    '; \
+  \
+  apt-get update; apt-get install -y --no-install-recommends \
+    $buildDeps \
     ocaml \
     ocaml-native-compilers \
     ocaml-findlib \
@@ -25,17 +21,22 @@ RUN apt-get update \
     liblablgtk2-ocaml-dev \
     liblablgtksourceview2-ocaml-dev \
     libgtk2.0-dev \
-    libocamlgraph-ocaml-dev
-
-RUN cd /tmp \
-  && wget https://coq.inria.fr/distrib/V$VERSION/files/coq-$VERSION.tar.gz \
-  && tar zxvf coq-$VERSION.tar.gz \
-  && rm -rf coq-$VERSION.tar.gz \
-  && cd coq-$VERSION \
-  && ./configure -prefix /usr/local \
-  && make \
-  && make install \
-  && cd .. \
-  && rm -rf coq-$VERSION
+    libocamlgraph-ocaml-dev \
+    ; \
+  \
+  cd /tmp; \
+  wget -O coq.tar.gz $COQ_URL; \
+  tar xf coq.tar.gz; \
+  rm -rf coq.tar.gz; \
+  cd coq; \
+  ./configure -prefix /usr/local; \
+  make; \
+  make install; \
+  cd ..; \
+  rm -rf coq; \
+  \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps; \
+  apt-get clean; apt-get autoclean; \
+  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 CMD ["coqide"]
