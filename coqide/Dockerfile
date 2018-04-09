@@ -1,10 +1,17 @@
 FROM debian:jessie-slim
 MAINTAINER tyabu1212@gmail.com
 
+ENV LANG      ja_JP.UTF-8
+ENV LC_CTYPE  ja_JP.UTF-8
+
 ENV VERSION "8.6"
 
 RUN mkdir /workspace
 WORKDIR /workspace
+
+RUN apt-get install locales \
+  && locale-gen ja_JP.UTF-8 \
+  && localedef -f UTF-8 -i ja_JP ja_JP.utf8
 
 RUN apt-get update \
   && apt-get upgrade -y \
