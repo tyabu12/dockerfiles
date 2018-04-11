@@ -1,0 +1,20 @@
+sudo: required
+
+language: bash
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+
+before_script:
+  - docker build -t tyabu/base base
+  - docker build -t tyabu/coq coq
+  - docker build -t tyabu/coqide coqide
+
+script:
+  - docker run tyabu/base
+  - docker run tyabu/coq -v
+  - docker run tyabu/coqide coqtop -v
