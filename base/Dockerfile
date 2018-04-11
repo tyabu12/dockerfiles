@@ -1,4 +1,4 @@
-FROM debian:jessie-slim
+FROM debian:stretch-slim
 
 MAINTAINER Tomohito Yabu "tyabu1212@gmail.com"
 
