@@ -37,4 +37,4 @@ RUN set -eux; \
   apt-get clean; apt-get autoclean; \
   rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-CMD ["coqide"]
+CMD ["coqc"]
