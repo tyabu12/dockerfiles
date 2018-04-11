@@ -16,5 +16,5 @@ before_script:
 
 script:
   - docker run tyabu/base
-  - docker run tyabu/coq -v
+  - docker run tyabu/coq coqtop -v
   - docker run tyabu/coqide coqtop -v
