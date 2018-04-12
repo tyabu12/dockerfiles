@@ -4,7 +4,8 @@ MAINTAINER tyabu1212@gmail.com
 
 ENV COQ_VERSION 8.6
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
-ENV COQ_SHA512SUM_URL https://coq.inria.fr/distrib/SHA512SUMS
+# https://coq.inria.fr/distrib/SHA512SUMS
+ENV COQ_SHA512 9f5f4913fda8cf83683fec9398b42d4567207c3d4b52b4638d5e09a24ed25a43905fb57a9fac1bb9f9d681bd47f3560e1da74e79348b3a3fd93e2e8c686cebae
 
 RUN set -eux; \
   \
@@ -24,10 +25,9 @@ RUN set -eux; \
   \
   mkdir -p /tmp/coq; \
   cd /tmp/coq; \
-  wget $COQ_URL; \
-  wget $COQ_SHA512SUM_URL; \
-  echo "`ls coq-*.tar.gz | xargs grep -F SHA512SUMS -e | cut -d' ' -f1` `ls coq-*.tar.gz`" | sha512sum -c -; \
-  tar xf coq*.tar.gz --strip-components=1; \
+  wget -nv -O coq.tar.gz $COQ_URL; \
+  echo "$COQ_SHA512 coq.tar.gz" | sha512sum -c -; \
+  tar xf coq.tar.gz --strip-components=1; \
   ./configure -prefix /usr/local; \
   make -j "$(nproc)"; \
   make install; \
