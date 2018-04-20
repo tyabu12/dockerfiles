@@ -13,8 +13,9 @@ before_script:
   - docker build -t tyabu/base base
   - docker build -t tyabu/coq coq
   - docker build -t tyabu/coqide coqide
+  - docker build -t tyabu/eliom:6.2.0 eliom/6.2.0
 
 script:
   - docker run tyabu/base
   - docker run tyabu/coq coqtop -v
-  - docker run tyabu/coqide coqtop -v
+  - docker run tyabu/eliom:6.2.0 --version
