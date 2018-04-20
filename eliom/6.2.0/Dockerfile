@@ -2,7 +2,7 @@ FROM ocaml/opam:alpine_ocaml-4.04.2
 
 ENV ELIOM_VER 6.2.0
 
-run set -eux; \
+RUN set -eux; \
   \
   sudo apk update; sudo apk upgrade; \
   sudo apk --no-cache add \
