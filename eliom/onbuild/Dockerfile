@@ -1,7 +1,5 @@
 FROM ocaml/opam:alpine_ocaml-4.04.2
 
-MAINTAINER Tomohito Yabu "tyabu1212@gmail.com"
-
 ENV ELIOM_VER 6.2.0
 
 RUN set -eux; \
@@ -20,6 +18,9 @@ RUN set -eux; \
   \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1); \
   opam install -j $NPROC -y eliom.${ELIOM_VER}
+
+RUN mkdir -p /webapp
+WORKDIR /webapp
 
 EXPOSE 80
 

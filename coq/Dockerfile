@@ -1,6 +1,6 @@
 FROM tyabu/base
 
-MAINTAINER tyabu1212@gmail.com
+MAINTAINER Tomohito Yabu "tyabu1212@gmail.com"
 
 ENV COQ_VERSION 8.6
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
