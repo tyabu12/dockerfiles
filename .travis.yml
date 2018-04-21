@@ -10,13 +10,13 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 before_script:
-  - docker build -t tyabu/base base
-  - docker build -t tyabu/coq coq
-  - docker build -t tyabu/coqide coqide
-  - docker build -t tyabu/eliom eliom
+  - docker build -t tyabu/debian  debian
+  - docker build -t tyabu/coq     coq
+  - docker build -t tyabu/coqide  coqide
+  - docker build -t tyabu/eliom   eliom
 
 script:
-  - docker run tyabu/base
-  - docker run tyabu/coq coqtop -v
+  - docker run tyabu/debian
+  - docker run tyabu/coq    coqtop -v
   - docker run tyabu/coqide coqtop -v
-  - docker run tyabu/eliom ocsigenserver.opt --version
+  - docker run tyabu/eliom  ocsigenserver.opt --version

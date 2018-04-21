@@ -1,4 +1,4 @@
-FROM tyabu/base
+FROM tyabu/debian
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
