@@ -14,6 +14,8 @@ RUN set -eux; \
     wget \
     make \
     ocaml-native-compilers \
+    liblablgtk2-ocaml-dev \
+    liblablgtksourceview2-ocaml-dev \
   '; \
   \
   apt-get update; apt-get install -y --no-install-recommends \
@@ -21,8 +23,8 @@ RUN set -eux; \
     ocaml \
     ocaml-findlib \
     camlp5 \
-    liblablgtk2-ocaml-dev \
-    liblablgtksourceview2-ocaml-dev \
+    liblablgtk2-ocaml \
+    liblablgtksourceview2-ocaml \
   ; \
   \
   mkdir -p /tmp/coq; \
