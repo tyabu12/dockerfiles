@@ -18,8 +18,7 @@ RUN set -eux; \
   ; \
   opam update; opam upgrade; \
   \
-  NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1); \
-  opam install -j $NPROC -y eliom.${ELIOM_VER}
+  opam install -j$(getconf _NPROCESSORS_ONLN) -y eliom.${ELIOM_VER}
 
 EXPOSE 80
 
