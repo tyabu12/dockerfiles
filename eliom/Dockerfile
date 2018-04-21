@@ -1,8 +1,8 @@
-FROM ocaml/opam:alpine_ocaml-4.04.2
+FROM ocaml/opam:alpine_ocaml-4.06.0
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
-ENV ELIOM_VER 6.2.0
+ENV ELIOM_VER 6.3.0
 
 RUN set -eux; \
   \
@@ -16,6 +16,8 @@ RUN set -eux; \
     openssl-dev \
     gdbm-dev \
   ; \
+  \
+  opam remote add git git://github.com/ocaml/opam-repository; \
   opam update; opam upgrade; \
   \
   opam install -j$(getconf _NPROCESSORS_ONLN) -y eliom.${ELIOM_VER}
