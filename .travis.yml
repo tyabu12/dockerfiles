@@ -13,9 +13,9 @@ before_script:
   - docker build -t tyabu/base base
   - docker build -t tyabu/coq coq
   - docker build -t tyabu/coqide coqide
-  - docker build -t tyabu/eliom:6.2.0 eliom/6.2.0
+  - docker build -t tyabu/eliom eliom
 
 script:
   - docker run tyabu/base
   - docker run tyabu/coq coqtop -v
-  - docker run tyabu/eliom:6.2.0 ocsigenserver.opt --version
+  - docker run tyabu/eliom ocsigenserver.opt --version
