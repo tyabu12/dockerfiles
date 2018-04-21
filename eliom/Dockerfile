@@ -1,6 +1,6 @@
 FROM ocaml/opam:alpine_ocaml-4.04.2
 
-MAINTAINER Tomohito Yabu "tyabu1212@gmail.com"
+LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
 ENV ELIOM_VER 6.2.0
 

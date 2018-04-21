@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-MAINTAINER Tomohito Yabu "tyabu1212@gmail.com"
+LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
