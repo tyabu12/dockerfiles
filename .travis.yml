@@ -18,4 +18,4 @@ before_script:
 script:
   - docker run tyabu/base
   - docker run tyabu/coq coqtop -v
-  - docker run tyabu/eliom:6.2.0 --version
+  - docker run tyabu/eliom:6.2.0 ocsigenserver.opt --version
