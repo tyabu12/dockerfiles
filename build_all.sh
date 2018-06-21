@@ -1,6 +1,12 @@
 #/bin/bash
 
-find . -maxdepth 1 -type d -name "[a-zA-Z]*" | awk '{print substr($0, 3)}' | while read dir
+find . -mindepth 2 -type f -name Dockerfile | while read line
 do
-  docker build -t tyabu/$dir $dir
+  line=$(echo $line | sed "s%/Dockerfile%%g")
+  image=$(echo $line | cut -s -d'/' -f2)
+  tag=$(echo $line | cut -s -d'/' -f3- | sed "s%/%-%g")
+  if [ -z $tag ]; then
+    tag="latest"
+  fi
+  docker build -t tyabu12/$image:$tag $line
 done
