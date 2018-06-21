@@ -17,4 +17,4 @@ script:
   - docker run tyabu/coq    coqtop -v
   - docker run tyabu/coqide coqtop -v
   - docker run tyabu/eliom  ocsigenserver.opt --version
-  - docker run tyabu/ocaml  ocaml -v
+  - docker run tyabu/ocaml  ocaml -version
