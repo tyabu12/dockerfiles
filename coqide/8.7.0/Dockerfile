@@ -2,10 +2,10 @@ FROM tyabu/debian
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
-ENV COQ_VERSION 8.6
+ENV COQ_VERSION 8.7.0
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
 # https://coq.inria.fr/distrib/SHA512SUMS
-ENV COQ_SHA512 9f5f4913fda8cf83683fec9398b42d4567207c3d4b52b4638d5e09a24ed25a43905fb57a9fac1bb9f9d681bd47f3560e1da74e79348b3a3fd93e2e8c686cebae
+ENV COQ_SHA512 c806881d1ab823d9c2d748aa2d7fd3faaa0f6395536942ad214c68658b2688e6c57941947a440ddb69bf1436249067eefd866ecb1d9e4c5e774e3218c80a6fc2
 
 RUN set -eux; \
   \

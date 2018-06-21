@@ -2,10 +2,10 @@ FROM tyabu/debian
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
 
-ENV COQ_VERSION 8.6
+ENV COQ_VERSION 8.7.2
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz
 # https://coq.inria.fr/distrib/SHA512SUMS
-ENV COQ_SHA512 9f5f4913fda8cf83683fec9398b42d4567207c3d4b52b4638d5e09a24ed25a43905fb57a9fac1bb9f9d681bd47f3560e1da74e79348b3a3fd93e2e8c686cebae
+ENV COQ_SHA512 6117ef243c62805996a21952016acaaf21db6d1b539fc813c19c897e100f45cde2bee7c9fb045b269a241b79306c656969ca8051e3212ea2090f6d7c1afad5a8
 
 RUN set -eux; \
   \
@@ -14,8 +14,6 @@ RUN set -eux; \
     wget \
     make \
     ocaml-native-compilers \
-    liblablgtk2-ocaml-dev \
-    liblablgtksourceview2-ocaml-dev \
   '; \
   \
   apt-get update; apt-get install -y --no-install-recommends \
@@ -23,8 +21,6 @@ RUN set -eux; \
     ocaml \
     ocaml-findlib \
     camlp5 \
-    liblablgtk2-ocaml \
-    liblablgtksourceview2-ocaml \
   ; \
   \
   mkdir -p /tmp/coq; \
@@ -41,4 +37,4 @@ RUN set -eux; \
   apt-get clean; apt-get autoclean; \
   rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-CMD ["coqide"]
+CMD ["coqtop"]
