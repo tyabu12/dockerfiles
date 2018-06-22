@@ -1,6 +1,7 @@
 FROM tyabu/debian
 
-LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>"
+LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
+  coq_version="8.7.1"
 
 ENV COQ_VERSION 8.7.1
 ENV COQ_URL https://coq.inria.fr/distrib/V${COQ_VERSION}/files/coq-${COQ_VERSION}.tar.gz

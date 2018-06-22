@@ -14,7 +14,6 @@ SHA512SUMS=$TMPDIR/SHA512SUMS
 wget -O $SHA512SUMS https://coq.inria.fr/distrib/SHA512SUMS
 
 for version in "${versions[@]}"; do
-  echo $version
   SHA512=$(grep -e "[^\\s]\+\\s\+V$version/files/coq-$version.tar.gz" $SHA512SUMS | cut -d' ' -f1)
   sed \
     -e 's!%%COQ_VERSION%%!'"$version"'!g' \
@@ -22,3 +21,5 @@ for version in "${versions[@]}"; do
     Dockerfile.template \
     > "$version/Dockerfile"
 done
+
+echo "Update version ${versions[@]} is done."
