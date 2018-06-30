@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find . -mindepth 2 -type f -name Dockerfile | while read line
+find . -mindepth 2 -name Dockerfile | while read line
 do
   line=$(echo $line | sed "s%/Dockerfile%%g")
   image=$(echo $line | cut -s -d'/' -f2)
