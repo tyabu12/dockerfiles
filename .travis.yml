@@ -20,9 +20,5 @@ script:
   - docker run tyabu12/eliom  ocsigenserver.opt --version
 
 after_success:
-  - curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/tyabu/ocaml/trigger/${OCAML_TRIGGER_TOKEN}/
-  - curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/tyabu/debian/trigger/${DEBIAN_TRIGGER_TOKEN}/
-  - curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/tyabu/coq/trigger/${COQ_TRIGGER_TOKEN}/
-  - curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/tyabu/coqide/trigger/${COQIDE_TRIGGER_TOKEN}/
-  - curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/tyabu/eliom/trigger/${ELIOM_TRIGGER_TOKEN}/
+  - ./trigger_all.sh
 

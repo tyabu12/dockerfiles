@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 find . -mindepth 2 -type f -name Dockerfile | while read line
 do
