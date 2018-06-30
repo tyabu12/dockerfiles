@@ -14,7 +14,7 @@ RUN set -eux; \
     m4 \
     perl \
     aspcud \
-    curl
+    curl \
     wget \
     tar \
     unzip \
