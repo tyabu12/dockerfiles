@@ -7,7 +7,7 @@ ENV OPAM_VERSION 2.0.0-rc3
 
 RUN set -eux; \
   : "Install dependencies"; \
-  apk update; apk upgrade; \
+  apk upgrade; \
   apk add --no-cache \
     sudo \
     g++ \

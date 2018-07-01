@@ -12,7 +12,7 @@ ENV OCAML_VERSION 4.06.1
 
 RUN set -eux; \
   : "Install dependencies"; \
-  apk update; apk upgrade; \
+  apk upgrade; \
   apk add --no-cache \
     gcc \
     libc-dev \
