@@ -1,5 +1,8 @@
 #!/bin/bash
 
+docker build -t tyabu12/ocaml ./ocaml
+docker build -t tyabu12/opam  ./opam
+
 find . -mindepth 2 -name Dockerfile | while read line
 do
   line=$(echo $line | sed "s%/Dockerfile%%g")
