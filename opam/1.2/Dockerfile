@@ -41,4 +41,6 @@ RUN set -eux; \
   : "Clean up"; \
   sudo rm -rf /var/cache/apk/*
 
+ENV ENV /home/opam/.profile
+
 CMD ["opam"]

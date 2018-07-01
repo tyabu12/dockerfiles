@@ -53,4 +53,6 @@ RUN set -eux; \
   cd; \
   sudo rm -rf ~/opam /var/cache/apk/*
 
+ENV ENV /home/opam/.profile
+
 CMD ["opam"]
