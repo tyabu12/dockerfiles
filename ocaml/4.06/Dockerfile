@@ -35,8 +35,7 @@ RUN set -eux; \
   make install; \
   : "Clean up"; \
   cd ../; \
-  rm -rf ./ocaml; \
   apk del .fetch-deps; \
-  rm -rf /var/cache/apk/*
+  rm -rf /usr/src/ocaml /var/cache/apk/*
 
 CMD ["ocaml"]
