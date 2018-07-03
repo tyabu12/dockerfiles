@@ -1,4 +1,4 @@
-FROM tyabu/debian
+FROM tyabu/opam
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
   coq_version="8.7.2"
