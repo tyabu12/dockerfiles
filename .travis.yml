@@ -13,12 +13,12 @@ before_script:
   - ./build_all.sh
 
 script:
-  - docker run tyabu12/ocaml  ocaml --version
-  - docker run tyabu12/opam   opam  --version
-  - docker run tyabu12/debian
-  - docker run tyabu12/coq    coqtop -v
-  - docker run tyabu12/coqide coqtop -v
-  - docker run tyabu12/eliom  ocsigenserver.opt --version
+  - docker run tyabu/ocaml  ocaml --version
+  - docker run tyabu/opam   opam  --version
+  - docker run tyabu/debian
+  - docker run tyabu/coq    coqtop -v
+  - docker run tyabu/coqide coqtop -v
+  - docker run tyabu/eliom  ocsigenserver.opt --version
 
 after_success:
   - ./trigger_all.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker build -t tyabu12/ocaml ./ocaml
-docker build -t tyabu12/opam  ./opam
+docker build -t tyabu/ocaml ./ocaml
+docker build -t tyabu/opam  ./opam
 
 find . -mindepth 2 -name Dockerfile | while read line
 do
@@ -11,5 +11,5 @@ do
   if [ -z $tag ]; then
     tag="latest"
   fi
-  docker build -t tyabu12/$image:$tag $line
+  docker build -t tyabu/$image:$tag $line
 done
