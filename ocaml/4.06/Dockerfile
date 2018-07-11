@@ -1,9 +1,9 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
   distro_style="apk" \
   distro="alpine" \
-  distro_long="alpine-3.7" \
+  distro_long="alpine-3.8" \
   arch="x86_64" \
   ocaml_version="4.06.1" \
   operatingsystem="linux"
@@ -25,7 +25,7 @@ RUN set -eux; \
   : "Fetch source"; \
   mkdir -p /usr/src/ocaml; \
   cd /usr/src/; \
-  wget -O ocaml.tar.gz https://github.com/ocaml/ocaml/archive/${OCAML_VERSION}.tar.gz; \
+  wget -qO ocaml.tar.gz https://github.com/ocaml/ocaml/archive/${OCAML_VERSION}.tar.gz; \
   tar xf ocaml.tar.gz -C /usr/src/ocaml --strip-components 1; \
   rm ocaml.tar.gz; \
   cd ocaml; \
