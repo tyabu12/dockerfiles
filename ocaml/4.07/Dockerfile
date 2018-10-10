@@ -5,10 +5,10 @@ LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
   distro="alpine" \
   distro_long="alpine-3.8" \
   arch="x86_64" \
-  ocaml_version="4.07.0" \
+  ocaml_version="4.07.1" \
   operatingsystem="linux"
 
-ENV OCAML_VERSION 4.07.0
+ENV OCAML_VERSION 4.07.1
 
 RUN set -eux; \
   : "Install dependencies"; \
@@ -27,7 +27,7 @@ RUN set -eux; \
   cd /usr/src/; \
   wget -qO ocaml.tar.gz https://github.com/ocaml/ocaml/archive/${OCAML_VERSION}.tar.gz; \
   tar xf ocaml.tar.gz -C /usr/src/ocaml --strip-components 1; \
-  rm ocaml.tar.gz; \
+  rm -f ocaml.tar.gz; \
   cd ocaml; \
   : "Build"; \
   ./configure; \
