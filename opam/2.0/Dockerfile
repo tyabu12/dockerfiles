@@ -1,9 +1,9 @@
 FROM tyabu/ocaml
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
-  opam_version="2.0.0-rc3"
+  opam_version="2.0.0"
 
-ENV OPAM_VERSION 2.0.0-rc3
+ENV OPAM_VERSION 2.0.0
 
 RUN set -eux; \
   : "Install dependencies"; \
@@ -35,9 +35,9 @@ WORKDIR /home/opam
 RUN set -eux; \
   : "Fetch source"; \
   mkdir ~/opam; \
-  wget -O opam.tar.gz https://github.com/ocaml/opam/archive/${OPAM_VERSION}.tar.gz; \
+  wget -qO opam.tar.gz https://github.com/ocaml/opam/archive/${OPAM_VERSION}.tar.gz; \
   tar xf opam.tar.gz -C ~/opam --strip-components 1; \
-  rm -f opam.tar.gz; \
+  rm opam.tar.gz; \
   : "Compile"; \
   cd ~/opam; \
   ./configure; \

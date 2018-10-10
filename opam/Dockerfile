@@ -1,1 +1,1 @@
-2.0.0-rc3/Dockerfile
+2.0/Dockerfile
