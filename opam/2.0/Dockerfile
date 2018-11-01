@@ -1,9 +1,9 @@
 FROM tyabu/ocaml
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
-  opam_version="2.0.0"
+  opam_version="2.0.1"
 
-ENV OPAM_VERSION 2.0.0
+ENV OPAM_VERSION 2.0.1
 
 RUN set -eux; \
   : "Install dependencies"; \
