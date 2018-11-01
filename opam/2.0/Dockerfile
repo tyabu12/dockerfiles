@@ -46,6 +46,7 @@ RUN set -eux; \
   opam init -a -y --shell='sh' --disable-sandboxing; \
   eval "$(opam env)"; \
   opam update; \
+  opam config set jobs "$(nproc)"; \
   opam install -y . --deps-only; \
   ./configure; \
   sudo -E "PATH=$PATH" make libinstall; \
@@ -55,4 +56,10 @@ RUN set -eux; \
 
 ENV ENV /home/opam/.profile
 
+COPY docker-entrypoint.sh /
+
+RUN sudo chown opam /docker-entrypoint.sh \
+  && chmod 700 /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["opam"]
