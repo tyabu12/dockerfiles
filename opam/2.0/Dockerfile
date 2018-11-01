@@ -51,12 +51,13 @@ RUN set -eux; \
   ./configure; \
   sudo -E "PATH=$PATH" make libinstall; \
   : "Clean up"; \
+  opam clean; \
   cd; \
   sudo rm -rf ~/opam /var/cache/apk/*
 
 ENV ENV /home/opam/.profile
 
-COPY docker-entrypoint.sh /
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN sudo chown opam /docker-entrypoint.sh \
   && chmod 700 /docker-entrypoint.sh
