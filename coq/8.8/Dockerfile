@@ -5,6 +5,14 @@ LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
 
 ENV COQ_VERSION 8.8.1
 
-RUN opam install -y coq.${COQ_VERSION}
+RUN set -eux; \
+  : "Set up"; \
+  eval "$(opam env)"; \
+  opam update; \
+  opam config set jobs "$(nproc)"; \
+  : "Install Coq"; \
+  opam pin add -y coq $COQ_VERSION; \
+  : "Clean up"; \
+  opam clean
 
 CMD ["coqtop"]
