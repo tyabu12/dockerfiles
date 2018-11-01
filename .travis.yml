@@ -1,20 +1,22 @@
 sudo: required
-
 language: bash
+services: docker
 
-services:
-  - docker
+env:
+  - NAME=debian VERSION=
+  - NAME=ocaml VERSION=4.07
+  - NAME=ocaml VERSION=4.06
+  - NAME=opam VERSION=2.0
+  - NAME=coq VERSION=8.8
+  - NAME=coq VERSION=8.7
+  - NAME=coqide VERSION=8.7
+  - NAME=coqide VERSION=8.6
+  - NAME=eliom VERSION=6.3
 
 cache:
   bundler: true
   directories:
     - $HOME/docker
-
-before_cache:
-  # Save tagged docker images
-  - >
-    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 
 before_install:
   - sudo apt-get update
@@ -23,15 +25,22 @@ before_install:
   - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
 
 before_script:
-  - ./build_all.sh
+  - cd "$NAME/$VERSION"
+  - image="tyabu/${NAME}:${VERSION:-latest}"
 
 script:
-  - docker run tyabu/ocaml  ocaml --version
-  - docker run tyabu/opam   opam  --version
-  - docker run tyabu/debian
-  - docker run tyabu/coq    coqtop -v
-  - docker run tyabu/coqide coqtop -v
-  - docker run tyabu/eliom  ocsigenserver.opt --version
+  - |
+    (
+      set -Eeuo pipefail
+      set -x
+      docker build -t "$image" .
+    )
+
+before_cache:
+  # Save tagged docker images
+  - >
+    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 
 after_success:
   - ./trigger_all.sh
