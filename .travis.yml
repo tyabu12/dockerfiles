@@ -38,6 +38,7 @@ script:
     )
 
 before_cache:
+  - docker image prune -f
   # Save tagged docker images
   - >
     mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
