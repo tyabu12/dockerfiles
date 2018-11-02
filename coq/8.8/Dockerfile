@@ -1,9 +1,9 @@
 FROM tyabu/opam:2.0
 
 LABEL maintainer="Tomohito Yabu <tyabu1212@gmail.com>" \
-  coq_version="8.8.1"
+  coq_version="8.8.2"
 
-ENV COQ_VERSION 8.8.1
+ENV COQ_VERSION 8.8.2
 
 RUN set -eux; \
   : "Set up"; \
