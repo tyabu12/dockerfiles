@@ -46,5 +46,16 @@ before_cache:
 
 after_success:
   - docker images
-  #- ./trigger.sh $image_name $TRIGGER_TOKEN
+
+jobs:
+  include:
+    - stage: trigger docker hub
+      cache: {}
+      before_install: skip
+      before_script: skip
+      script: skip
+      before_cache: skip
+      after_success:
+        - ./trigger.sh debian $DEBIAN_TRIGGER_TOKEN
+        - ./trigger.sh ocaml $OCAML_TRIGGER_TOKEN
 
