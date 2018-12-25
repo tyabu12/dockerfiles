@@ -7,16 +7,15 @@ ENV COQ_VERSION 8.8.2
 ENV COQ_URL https://github.com/coq/coq/archive/V${COQ_VERSION}.tar.gz
 
 RUN set -eux; \
-  \
+  : "Install dependencies"; \
   buildDeps=' \
     ca-certificates \
-    wget \
+    curl \
     make \
     ocaml-native-compilers \
     liblablgtk2-ocaml-dev \
     liblablgtksourceview2-ocaml-dev \
   '; \
-  \
   apt-get update; apt-get install -y --no-install-recommends \
     $buildDeps \
     ocaml \
@@ -25,16 +24,17 @@ RUN set -eux; \
     liblablgtk2-ocaml \
     liblablgtksourceview2-ocaml \
   ; \
-  \
-  mkdir -p /tmp/coq; \
-  cd /tmp/coq; \
-  wget -qO coq.tar.gz $COQ_URL; \
-  tar xf coq.tar.gz --strip-components=1; \
+  : "Fetch source"; \
+  mkdir -p /usr/src/coq; \
+  curl -sSL $COQ_URL \
+    | tar xz -C /usr/src/coq --strip-components 1; \
+  : "Build"; \
+  cd /usr/src/coq; \
   ./configure -prefix /usr/local; \
   make -j "$(nproc)"; \
   make install; \
-  rm -rf /tmp/coq; \
-  \
+  : "Clean up"; \
+  rm -rf /usr/src/coq; \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps; \
   apt-get clean; apt-get autoclean; \
   rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
