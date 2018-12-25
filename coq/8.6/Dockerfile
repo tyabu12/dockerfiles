@@ -10,7 +10,6 @@ RUN set -eux; \
   opam switch create 4.05.0; \
   eval "$(opam env)"; \
   opam update; \
-  opam config set jobs "$(nproc)"; \
   : "Install Coq"; \
   opam pin add -y coq $COQ_VERSION; \
   : "Clean up"; \

@@ -9,7 +9,6 @@ RUN set -eux; \
   : "Set up"; \
   eval "$(opam env)"; \
   opam update; \
-  opam config set jobs "$(nproc)"; \
   : "Install Coq"; \
   opam pin add -y coq $COQ_VERSION; \
   : "Clean up"; \

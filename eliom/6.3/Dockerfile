@@ -26,8 +26,8 @@ RUN set -eux; \
   ; \
   opam switch create 4.06.1; \
   eval "$(opam env)"; \
+  : "Install"; \
   opam update; \
-  opam config set jobs "$(nproc)"; \
   opam pin add -y eliom $ELIOM_VERSION; \
   : "Clean up"; \
   opam clean; \
@@ -36,4 +36,4 @@ RUN set -eux; \
 
 EXPOSE 80
 
-CMD ["ocsigenserver.opt"]
+CMD ["ocsigenserver"]
