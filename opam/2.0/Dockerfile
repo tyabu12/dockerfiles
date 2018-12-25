@@ -27,17 +27,16 @@ RUN set -eux; \
   echo "opam ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/opam; \
   chmod 440 /etc/sudoers.d/opam; \
   chown root:root /etc/sudoers.d/opam; \
-  sed "s/^Defaults.*requiretty//g" /etc/sudoers
+  sed -n "s/^Defaults.*requiretty//g" /etc/sudoers
 
 USER opam
 WORKDIR /home/opam
 
 RUN set -eux; \
   : "Fetch source"; \
-  mkdir ~/opam; \
-  wget -qO opam.tar.gz https://github.com/ocaml/opam/archive/${OPAM_VERSION}.tar.gz; \
-  tar xf opam.tar.gz -C ~/opam --strip-components 1; \
-  rm opam.tar.gz; \
+  mkdir -p ~/opam; \
+  curl -sSL https://github.com/ocaml/opam/archive/${OPAM_VERSION}.tar.gz \
+    | tar zx -C ~/opam --strip-components 1; \
   : "Compile"; \
   cd ~/opam; \
   ./configure; \
@@ -47,12 +46,13 @@ RUN set -eux; \
   eval "$(opam env)"; \
   opam update; \
   opam config set jobs "$(nproc)"; \
+  # https://discuss.ocaml.org/t/ann-opam-2-0-2/3046/11
+  opam pin add -y dune 1.5.1; \
   opam install -y . --deps-only; \
   ./configure; \
   sudo -E "PATH=$PATH" make libinstall; \
   : "Clean up"; \
   opam clean; \
-  cd; \
   sudo rm -rf ~/opam /var/cache/apk/*
 
 ENV ENV /home/opam/.profile

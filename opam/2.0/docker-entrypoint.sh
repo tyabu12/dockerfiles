@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-eval "$(opam env)"
+eval `opam env`
 
 exec "$@"
