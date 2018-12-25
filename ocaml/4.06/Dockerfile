@@ -19,21 +19,19 @@ RUN set -eux; \
     make \
   ; \
   apk add --no-cache --virtual .fetch-deps \
-    wget \
+    curl \
     tar \
   ; \
   : "Fetch source"; \
   mkdir -p /usr/src/ocaml; \
-  wget -qO ocaml.tar.gz https://github.com/ocaml/ocaml/archive/${OCAML_VERSION}.tar.gz; \
-  tar xf ocaml.tar.gz -C /usr/src/ocaml --strip-components 1; \
-  rm ocaml.tar.gz; \
+  curl -sSL https://github.com/ocaml/ocaml/archive/${OCAML_VERSION}.tar.gz \
+    | tar xz -C /usr/src/ocaml --strip-components 1; \
   : "Build"; \
   cd /usr/src/ocaml; \
   ./configure; \
   make world.opt -j"$(nproc)"; \
   make install; \
   : "Clean up"; \
-  cd ..; \
   apk del .fetch-deps; \
   rm -rf /usr/src/ocaml /var/cache/apk/*
 
