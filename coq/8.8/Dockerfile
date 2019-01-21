@@ -8,6 +8,7 @@ ENV COQ_VERSION 8.8.2
 RUN set -eux; \
   : "Set up"; \
   eval "$(opam env)"; \
+  opam repo add coq-released https://coq.inria.fr/opam/released; \
   opam update; \
   : "Install Coq"; \
   opam pin add -y coq $COQ_VERSION; \
