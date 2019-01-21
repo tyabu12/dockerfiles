@@ -45,8 +45,6 @@ RUN set -eux; \
   opam init -a -y --shell='sh' --disable-sandboxing; \
   eval "$(opam env)"; \
   opam update; \
-  # https://discuss.ocaml.org/t/ann-opam-2-0-2/3046/11
-  opam pin add -y dune 1.5.1; \
   opam install -y . --deps-only; \
   ./configure; \
   sudo -E "PATH=$PATH" make libinstall; \
@@ -56,7 +54,7 @@ RUN set -eux; \
 
 ENV ENV /home/opam/.profile
 
-COPY --chown=opam docker-entrypoint.sh /docker-entrypoint.sh
+COPY --chown=opam:nogroup docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod 700 /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
