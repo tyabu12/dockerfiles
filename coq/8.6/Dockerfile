@@ -12,7 +12,7 @@ RUN set -eux; \
   opam repo add coq-released https://coq.inria.fr/opam/released; \
   opam update; \
   : "Install Coq"; \
-  opam pin add -y coq $COQ_VERSION; \
+  opam pin add -yv coq $COQ_VERSION; \
   : "Clean up"; \
   opam clean
 
